@@ -27,12 +27,14 @@ if($modx->event->name == 'OnDocFormSave' && !empty($fields)) {
 
     $fields = explode(',',$fields);
     foreach($fields as $item) {
-        ${$item} = $modResource->get($item);
+        $value = $modResource->get($item);
 
-        if(!empty(${$item})) {
-            ${$item} = html_entity_decode(${$item});
-            ${$item} = htmlspecialchars(${$item});
-            $modResource->set($item, ${$item});
+        if(!empty($value)) {
+            $value = html_entity_decode($value);
+            $value = htmlspecialchars($value);
+            $modResource->set($item, $value);
+
+            unset($value);
         }
     }
 
